@@ -12,15 +12,16 @@ export const MealCard: FC<MealCardProps> = ({ meal }) => {
   const navigate = useNavigate();
 
     return (
-        <div key={meal.idMeal} className={styles.card}>
+        <div key={meal.idMeal} className={styles.card} onClick={() => navigate(`/recipe/${meal.idMeal}`)}>
             <img
               src={meal.strMealThumb}
               alt={meal.strMeal}
-              className={styles.cardImage}
+              className={styles.image}
             />
-            <h3 onClick={() => navigate(`/recipe/${meal.idMeal}`)}>{meal.strMeal}</h3>
-            <p>{meal.strCategory}</p>
-            <p>{meal.strArea}</p>
+            <h3 className={styles.title}>{meal.strMeal}</h3>
+            <div>
+            <span>{meal.strCategory}</span> - <span>{meal.strArea}</span>
+            </div>
           </div>
     )
 }
