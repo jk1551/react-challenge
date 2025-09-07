@@ -1,7 +1,7 @@
 import type { FC } from "react";
-import type { Meal } from "../../hooks/useApi"
 import styles from './Card.module.scss';
 import { useNavigate } from "react-router-dom";
+import type { Meal } from "../../types/meal";
 
 
 interface MealCardProps {

@@ -1,6 +1,7 @@
 import type { AxiosInstance, AxiosResponse } from "axios";
 import axios from "axios";
 import { createContext, useContext, useMemo, type ReactNode } from "react";
+import type { Meal } from "../types/meal";
 
 export interface ApiContextType {
     api: AxiosInstance;
@@ -8,13 +9,7 @@ export interface ApiContextType {
     getMealById: (id: number) => Promise<Meal>
 }
 
-export interface Meal {
-  idMeal: string;
-  strMeal: string;
-  strCategory: string;
-  strArea: string;
-  strMealThumb: string;
-}
+
 
 const ApiContext = createContext<ApiContextType | null>(null);
 
