@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
-import { useApi } from '../hooks/useApi'
-import { MealCard } from '../components/cards/Meal'
-import type { Meal } from '../types/meal';
+import { useApi } from '../../hooks/useApi'
+import { MealCard } from '../../components/cards/Meal'
+import type { Meal } from '../../types/meal';
+import styles from './HomePage.module.scss';
 
 const Home: React.FC = () => {
   const { getRandomMeal } = useApi();
@@ -23,13 +24,15 @@ const Home: React.FC = () => {
 
   return (
     <div>
-      <h1>Recipes of the Day</h1>
-      <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-        {meals.map((meal) => (
+    <h1>Recipes of the Day</h1>
+    <div className={styles.cards}>
+      {meals.map((meal) => (
+        <div key={meal.idMeal} className={styles.card}>
           <MealCard meal={meal} />
-        ))}
-      </div>
+        </div>
+      ))}
     </div>
+  </div>
   );
 }
 
