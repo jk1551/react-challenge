@@ -5,7 +5,7 @@ export default function RootLayout() {
   return (
     <div>
       <header>
-        <Link to="/">Home</Link>
+        <Link to="/">Home</Link> | <Link to="favorites">Favorites</Link>
       </header>
       <main>
         <Outlet />

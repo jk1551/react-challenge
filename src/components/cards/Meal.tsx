@@ -1,7 +1,7 @@
 import type { FC } from "react";
-import type { Meal } from "../../hooks/useApi"
 import styles from './Card.module.scss';
 import { useNavigate } from "react-router-dom";
+import type { Meal } from "../../types/meal";
 
 
 interface MealCardProps {
@@ -18,7 +18,7 @@ export const MealCard: FC<MealCardProps> = ({ meal }) => {
               alt={meal.strMeal}
               className={styles.cardImage}
             />
-            <h3 onClick={() => navigate(`/${meal.idMeal}`)}>{meal.strMeal}</h3>
+            <h3 onClick={() => navigate(`/recipe/${meal.idMeal}`)}>{meal.strMeal}</h3>
             <p>{meal.strCategory}</p>
             <p>{meal.strArea}</p>
           </div>
