@@ -4,11 +4,16 @@ import { createContext, useContext, useMemo, type ReactNode } from "react";
 
 export interface ApiContextType {
     api: AxiosInstance;
-    getRandomMeal: () => Promise<AxiosResponse<Meal>>
+    getRandomMeal: () => Promise<Meal>
+    getMealById: (id: number) => Promise<Meal>
 }
 
 export interface Meal {
-    idMeal: string
+  idMeal: string;
+  strMeal: string;
+  strCategory: string;
+  strArea: string;
+  strMealThumb: string;
 }
 
 const ApiContext = createContext<ApiContextType | null>(null);
@@ -29,7 +34,7 @@ export const ApiProvider: React.FC<ApiProviderProps> = ({ children }) => {
 
     const api = useMemo(() => {
         const instance = axios.create({
-          baseURL: 'https://www.themealdb.com/',
+          baseURL: 'https://www.themealdb.com/api/json/v1/1/',
           headers: {
             'Content-Type': 'application/json',
           },
@@ -38,9 +43,29 @@ export const ApiProvider: React.FC<ApiProviderProps> = ({ children }) => {
         return instance;
       }, []);
 
+      // This endpoint returns an array of meals so we just need to take the first one
+      const getRandomMeal = async (): Promise<Meal> => {
+        const response: AxiosResponse<{ meals: Meal[] }> = await api.get(
+          '/random.php'
+        );
+        return response.data.meals[0];
+      };
+    
+      const getMealById = async (id: number): Promise<Meal> => {
+        const response: AxiosResponse<{ meals: Meal[] }> = await api.get(
+          '', {
+            params: {
+              i: id
+            }
+          }
+        )
+        return response.data.meals[0];
+      }
+
     const value: ApiContextType = {
         api,
-        getRandomMeal: () => api.get<Meal>('/api/json/v1/1/random.php'),
+        getRandomMeal,
+        getMealById
       };
 
     return <ApiContext.Provider value={value}>{children}</ApiContext.Provider>;

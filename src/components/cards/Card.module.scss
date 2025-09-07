@@ -1,0 +1,12 @@
+.card {
+    background-color: #3498db;
+    color: white;
+    &:hover {
+        background-color: #2980b9;
+    }
+}
+
+.cardImage {
+    width: 100px;
+    height: 100px;
+}
