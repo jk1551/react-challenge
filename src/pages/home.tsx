@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
-import { useApi, type Meal } from '../hooks/useApi'
+import { useApi } from '../hooks/useApi'
 import { MealCard } from '../components/cards/Meal'
+import type { Meal } from '../types/meal';
 
 const Home: React.FC = () => {
   const { getRandomMeal } = useApi();
