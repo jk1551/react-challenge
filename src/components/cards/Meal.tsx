@@ -18,7 +18,7 @@ export const MealCard: FC<MealCardProps> = ({ meal }) => {
               alt={meal.strMeal}
               className={styles.cardImage}
             />
-            <h3 onClick={() => navigate(`/${meal.idMeal}`)}>{meal.strMeal}</h3>
+            <h3 onClick={() => navigate(`/recipe/${meal.idMeal}`)}>{meal.strMeal}</h3>
             <p>{meal.strCategory}</p>
             <p>{meal.strArea}</p>
           </div>

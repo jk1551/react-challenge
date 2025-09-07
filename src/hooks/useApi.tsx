@@ -34,7 +34,7 @@ export const ApiProvider: React.FC<ApiProviderProps> = ({ children }) => {
 
     const api = useMemo(() => {
         const instance = axios.create({
-          baseURL: 'https://www.themealdb.com/api/json/v1/1/',
+          baseURL: 'https://www.themealdb.com/api/json/v1/1',
           headers: {
             'Content-Type': 'application/json',
           },
@@ -52,15 +52,22 @@ export const ApiProvider: React.FC<ApiProviderProps> = ({ children }) => {
       };
     
       const getMealById = async (id: number): Promise<Meal> => {
-        const response: AxiosResponse<{ meals: Meal[] }> = await api.get(
-          '', {
-            params: {
-              i: id
-            }
-          }
-        )
+        if (id == null) {
+          throw new Error('Missing id');
+        }
+      
+        const response: AxiosResponse<{ meals: Meal[] }> =
+          await api.get('/lookup.php', {
+            params: { i: id }
+          });
+      
+        if (!response.data.meals || response.data.meals.length === 0) {
+          throw new Error('No meal found');
+        }
+      
         return response.data.meals[0];
-      }
+      };
+      
 
     const value: ApiContextType = {
         api,
